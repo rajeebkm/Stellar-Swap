@@ -43,7 +43,8 @@ async function runDeFiOperations() {
     console.log("Custom Asset:", nexusAsset);
     console.log("Liquidity Pool Asset:", lpAsset);
     console.log("Liquidity Pool ID:", liquidityPoolId);
-
+    
+    // lpDepositTransaction
     const lpDepositTransaction = new TransactionBuilder(defiAccount, {
         fee: BASE_FEE,
         networkPassphrase: Networks.TESTNET
@@ -70,6 +71,8 @@ async function runDeFiOperations() {
         console.log(`Error creating Liquidity Pool: ${error}`);
         return;
     }
+
+    // lpSwapTransaction
     const traderKeypair = Keypair.random();
     console.log("Trader Public Key:", traderKeypair.publicKey());
     await fundAccountWithFriendbot(traderKeypair.publicKey());
@@ -100,6 +103,29 @@ async function runDeFiOperations() {
             `https://stellar.expert/explorer/testnet/tx/${result.hash}`);
     } catch (error) {
         console.log(`Error performing swap: ${error}`);
+    }
+
+    // lpWithdrawTransaction
+    const lpWithdrawTransaction = new TransactionBuilder(defiAccount, {
+        fee: BASE_FEE,
+        networkPassphrase: Networks.TESTNET
+    })
+        .addOperation(Operation.liquidityPoolWithdraw({
+            liquidityPoolId: liquidityPoolId,
+            amount: '50',
+            minAmountA: '0',
+            minAmountB: '0'
+        }))
+        .setTimeout(30)
+        .build();
+    lpWithdrawTransaction.sign(defiKeypair);
+    try {
+        const result = await server.sendTransaction(lpWithdrawTransaction);
+        console.log("Withdrawal Successful. Transaction URL:",
+            `https://stellar.expert/explorer/testnet/tx/${result.hash}`);
+
+    } catch (error) {
+        console.log(`Error withdrawing from Liquidity Pool: ${error}`);
     }
 
 }
