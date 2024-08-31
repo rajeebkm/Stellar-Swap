@@ -70,6 +70,38 @@ async function runDeFiOperations() {
         console.log(`Error creating Liquidity Pool: ${error}`);
         return;
     }
+    const traderKeypair = Keypair.random();
+    console.log("Trader Public Key:", traderKeypair.publicKey());
+    await fundAccountWithFriendbot(traderKeypair.publicKey());
+    const traderAccount = await server.getAccount(traderKeypair.publicKey());
+    const pathPaymentTransaction = new TransactionBuilder(traderAccount, {
+        fee: BASE_FEE,
+        networkPassphrase: Networks.TESTNET
+    })
+        .addOperation(Operation.changeTrust({
+            asset: nexusAsset,
+            source: traderKeypair.publicKey()
+        }))
+        .addOperation(Operation.pathPaymentStrictReceive({
+            sendAsset: Asset.native(),
+            sendMax: '1000',
+            destination: traderKeypair.publicKey(),
+            destAsset: nexusAsset,
+            destAmount: '50',
+            source: traderKeypair.publicKey()
+        }))
+        .setTimeout(30)
+        .build();
+
+    pathPaymentTransaction.sign(traderKeypair);
+    try {
+        const result = await server.sendTransaction(pathPaymentTransaction);
+        console.log("Swap Performed. Transaction URL:",
+            `https://stellar.expert/explorer/testnet/tx/${result.hash}`);
+    } catch (error) {
+        console.log(`Error performing swap: ${error}`);
+    }
+
 }
 
 runDeFiOperations().catch(console.error);
