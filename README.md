@@ -1,4 +1,4 @@
-# Stellar-Swap
+# Nexus Swap
 
 This project demonstrates the creation of a custom asset (Let's say, `Nexus`) on the Stellar testnet, setting up a liquidity pool, performing a swap, and withdrawing funds from the pool.
 
