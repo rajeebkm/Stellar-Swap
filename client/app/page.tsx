@@ -23,7 +23,7 @@ export default function Home() {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white dark:text-gray-200 animate-fadeIn transition duration-700 ease-in-out transform hover:scale-105">
               Welcome to
             </h1>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-blue-800 dark:text-blue-500 animate-bounce transition duration-700 ease-in-out transform hover:scale-105">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-green-800 dark:text-green-500 animate-bounce transition duration-700 ease-in-out transform hover:scale-105">
               Nexus Swap
             </h2>
             <p className="text-lg md:text-2xl lg:text-xl text-white dark:text-white animate-fadeInDelay transition duration-700 ease-in-out transform hover:scale-105">
