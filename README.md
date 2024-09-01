@@ -71,6 +71,8 @@ Transaction URL: https://stellar.expert/explorer/testnet/tx/6c0523ee5b5c18a51af7
 
 Transaction URL: https://stellar.expert/explorer/testnet/tx/6aa7c18348e263450ffc4437f70a4d93666a2edf09dea73604a6ce0e66ad95b8
 
+<img width="1074" alt="Screenshot 2024-09-01 at 01 40 26" src="https://github.com/user-attachments/assets/ed3c80a7-193e-4d37-a65e-78573fd57d2e">
+
 ## Social Media Post
 
 I made a tweet/post about this project and tagged Ekolance and Stellar. You can view the post here: https://x.com/rajeebkrmalik/status/1829973954016018559
